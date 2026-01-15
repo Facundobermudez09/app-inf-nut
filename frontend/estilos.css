@@ -1,0 +1,511 @@
+/* ===== IMPORTACIÓN DE FUENTES ===== */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap');
+
+/* ===== VARIABLES CSS ===== */
+:root {
+    /* Colores principales */
+    --color-primario: #6366f1;
+    --color-secundario: #8b5cf6;
+    --color-acento: #ec4899;
+    --color-exito: #10b981;
+    --color-advertencia: #f59e0b;
+    --color-error: #ef4444;
+    
+    /* Colores de fondo */
+    --color-fondo: #0f172a;
+    --color-fondo-secundario: #1e293b;
+    --color-fondo-terciario: #334155;
+    
+    /* Colores de texto */
+    --color-texto: #f1f5f9;
+    --color-texto-secundario: #cbd5e1;
+    --color-texto-terciario: #94a3b8;
+    
+    /* Efectos */
+    --sombra-pequeña: 0 2px 8px rgba(0, 0, 0, 0.3);
+    --sombra-mediana: 0 4px 16px rgba(0, 0, 0, 0.4);
+    --sombra-grande: 0 8px 32px rgba(0, 0, 0, 0.5);
+    --sombra-glow: 0 0 20px rgba(99, 102, 241, 0.3);
+    
+    /* Glassmorphism */
+    --vidrio-fondo: rgba(30, 41, 59, 0.7);
+    --vidrio-borde: rgba(255, 255, 255, 0.1);
+    
+    /* Transiciones */
+    --transicion-rapida: 0.2s ease;
+    --transicion-normal: 0.3s ease;
+    --transicion-lenta: 0.5s ease;
+}
+
+/* ===== RESET Y BASE ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+    color: var(--color-texto);
+    min-height: 100vh;
+    overflow-x: hidden;
+    line-height: 1.6;
+}
+
+/* ===== CANVAS 3D DE FONDO ===== */
+#canvas3d {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    background: radial-gradient(ellipse at center, #1e293b 0%, #0f172a 100%);
+}
+
+/* ===== CONTENEDOR PRINCIPAL ===== */
+.contenedor-principal {
+    position: relative;
+    z-index: 1;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+/* ===== ENCABEZADO ===== */
+.encabezado {
+    text-align: center;
+    margin-bottom: 3rem;
+    animation: deslizarAbajo 0.8s ease;
+}
+
+.titulo-principal {
+    font-size: 3.5rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, var(--color-primario), var(--color-secundario), var(--color-acento));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.icono-titulo {
+    font-size: 3rem;
+    filter: drop-shadow(0 0 10px rgba(99, 102, 241, 0.5));
+}
+
+.subtitulo {
+    font-size: 1.2rem;
+    color: var(--color-texto-secundario);
+    font-weight: 300;
+}
+
+/* ===== PANEL DE BÚSQUEDA ===== */
+.panel-busqueda {
+    background: var(--vidrio-fondo);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--vidrio-borde);
+    border-radius: 24px;
+    padding: 2.5rem;
+    margin-bottom: 2rem;
+    box-shadow: var(--sombra-grande);
+    animation: deslizarAbajo 0.8s ease 0.2s backwards;
+}
+
+.contenedor-busqueda {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.input-busqueda {
+    flex: 1;
+    padding: 1rem 1.5rem;
+    font-size: 1.1rem;
+    background: rgba(15, 23, 42, 0.6);
+    border: 2px solid var(--vidrio-borde);
+    border-radius: 16px;
+    color: var(--color-texto);
+    font-family: 'Inter', sans-serif;
+    transition: all var(--transicion-normal);
+}
+
+.input-busqueda:focus {
+    outline: none;
+    border-color: var(--color-primario);
+    box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.2);
+    transform: translateY(-2px);
+}
+
+.input-busqueda::placeholder {
+    color: var(--color-texto-terciario);
+}
+
+.btn-buscar {
+    padding: 1rem 2.5rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    background: linear-gradient(135deg, var(--color-primario), var(--color-secundario));
+    color: white;
+    border: none;
+    border-radius: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all var(--transicion-normal);
+    box-shadow: var(--sombra-mediana);
+}
+
+.btn-buscar:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--sombra-grande), var(--sombra-glow);
+}
+
+.btn-buscar:active {
+    transform: translateY(-1px);
+}
+
+.icono-buscar {
+    font-size: 1.3rem;
+}
+
+.texto-ayuda {
+    text-align: center;
+    color: var(--color-texto-terciario);
+    font-size: 0.95rem;
+}
+
+.codigo-ejemplo {
+    background: rgba(99, 102, 241, 0.2);
+    padding: 0.3rem 0.8rem;
+    border-radius: 8px;
+    color: var(--color-primario);
+    cursor: pointer;
+    transition: all var(--transicion-rapida);
+    font-family: 'Courier New', monospace;
+    font-weight: 600;
+}
+
+.codigo-ejemplo:hover {
+    background: rgba(99, 102, 241, 0.3);
+    transform: scale(1.05);
+}
+
+/* ===== PANEL DE PRODUCTO ===== */
+.panel-producto {
+    animation: deslizarAbajo 0.8s ease 0.4s backwards;
+}
+
+.tarjeta-producto {
+    background: var(--vidrio-fondo);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--vidrio-borde);
+    border-radius: 24px;
+    padding: 2rem;
+    margin-bottom: 1.5rem;
+    box-shadow: var(--sombra-grande);
+}
+
+.encabezado-producto {
+    margin-bottom: 1rem;
+}
+
+.nombre-producto {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--color-texto);
+    margin-bottom: 0.5rem;
+}
+
+.marca-producto {
+    font-size: 1.2rem;
+    color: var(--color-texto-secundario);
+    font-weight: 400;
+}
+
+.info-adicional {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.codigo-producto,
+.fuente-producto {
+    padding: 0.5rem 1rem;
+    background: rgba(99, 102, 241, 0.15);
+    border-radius: 12px;
+    font-size: 0.9rem;
+    color: var(--color-texto-secundario);
+    border: 1px solid rgba(99, 102, 241, 0.3);
+}
+
+/* ===== CALCULADORA DE PORCIÓN ===== */
+.calculadora-porcion {
+    background: var(--vidrio-fondo);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--vidrio-borde);
+    border-radius: 24px;
+    padding: 2rem;
+    margin-bottom: 1.5rem;
+    box-shadow: var(--sombra-grande);
+}
+
+.titulo-calculadora {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    color: var(--color-texto);
+}
+
+.contenedor-porcion {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.input-gramos {
+    width: 150px;
+    padding: 0.8rem 1.2rem;
+    font-size: 1.1rem;
+    background: rgba(15, 23, 42, 0.6);
+    border: 2px solid var(--vidrio-borde);
+    border-radius: 12px;
+    color: var(--color-texto);
+    font-family: 'Inter', sans-serif;
+    transition: all var(--transicion-normal);
+}
+
+.input-gramos:focus {
+    outline: none;
+    border-color: var(--color-acento);
+    box-shadow: 0 0 0 4px rgba(236, 72, 153, 0.2);
+}
+
+.unidad-gramos {
+    color: var(--color-texto-secundario);
+    font-weight: 500;
+}
+
+.btn-calcular {
+    padding: 0.8rem 2rem;
+    font-size: 1rem;
+    font-weight: 600;
+    background: linear-gradient(135deg, var(--color-acento), var(--color-secundario));
+    color: white;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all var(--transicion-normal);
+    box-shadow: var(--sombra-mediana);
+}
+
+.btn-calcular:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--sombra-grande);
+}
+
+/* ===== TABLA DE NUTRIENTES ===== */
+.contenedor-tabla {
+    background: var(--vidrio-fondo);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--vidrio-borde);
+    border-radius: 24px;
+    padding: 2rem;
+    box-shadow: var(--sombra-grande);
+}
+
+.titulo-nutrientes {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    color: var(--color-texto);
+}
+
+.tabla-nutrientes {
+    display: grid;
+    gap: 1rem;
+}
+
+.fila-nutriente {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    background: rgba(15, 23, 42, 0.5);
+    border-radius: 12px;
+    border-left: 4px solid var(--color-primario);
+    transition: all var(--transicion-normal);
+}
+
+.fila-nutriente:hover {
+    background: rgba(15, 23, 42, 0.7);
+    transform: translateX(5px);
+}
+
+.nombre-nutriente {
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: var(--color-texto);
+}
+
+.valor-nutriente {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--color-primario);
+}
+
+/* ===== INDICADOR DE CARGA ===== */
+.indicador-carga {
+    text-align: center;
+    padding: 3rem;
+    background: var(--vidrio-fondo);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--vidrio-borde);
+    border-radius: 24px;
+    box-shadow: var(--sombra-grande);
+}
+
+.spinner {
+    width: 60px;
+    height: 60px;
+    margin: 0 auto 1.5rem;
+    border: 4px solid rgba(99, 102, 241, 0.2);
+    border-top-color: var(--color-primario);
+    border-radius: 50%;
+    animation: girar 1s linear infinite;
+}
+
+@keyframes girar {
+    to { transform: rotate(360deg); }
+}
+
+/* ===== MENSAJE DE ERROR ===== */
+.mensaje-error {
+    background: rgba(239, 68, 68, 0.1);
+    backdrop-filter: blur(20px);
+    border: 2px solid var(--color-error);
+    border-radius: 16px;
+    padding: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    box-shadow: var(--sombra-mediana);
+}
+
+.icono-error {
+    font-size: 2rem;
+}
+
+.mensaje-error p {
+    color: var(--color-texto);
+    font-weight: 500;
+}
+
+/* ===== CONTROLES 3D ===== */
+.controles-3d {
+    position: fixed;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--vidrio-fondo);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--vidrio-borde);
+    border-radius: 16px;
+    padding: 1rem 2rem;
+    box-shadow: var(--sombra-grande);
+    z-index: 10;
+}
+
+.texto-controles {
+    color: var(--color-texto-secundario);
+    font-size: 0.9rem;
+    margin: 0;
+}
+
+/* ===== UTILIDADES ===== */
+.oculto {
+    display: none !important;
+}
+
+/* ===== ANIMACIONES ===== */
+@keyframes deslizarAbajo {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes aparecer {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+    .contenedor-principal {
+        padding: 1rem;
+    }
+    
+    .titulo-principal {
+        font-size: 2rem;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .icono-titulo {
+        font-size: 2rem;
+    }
+    
+    .subtitulo {
+        font-size: 1rem;
+    }
+    
+    .contenedor-busqueda {
+        flex-direction: column;
+    }
+    
+    .btn-buscar {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .contenedor-porcion {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .input-gramos {
+        width: 100%;
+    }
+    
+    .btn-calcular {
+        width: 100%;
+    }
+    
+    .controles-3d {
+        bottom: 1rem;
+        left: 1rem;
+        right: 1rem;
+        transform: none;
+    }
+    
+    .texto-controles {
+        font-size: 0.8rem;
+    }
+}

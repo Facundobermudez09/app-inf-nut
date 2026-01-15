@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visualizador Nutricional 3D</title>
+    <meta name="description" content="Aplicación interactiva 3D para visualizar información nutricional de productos">
+    <link rel="stylesheet" href="estilos.css">
+</head>
+
+<body>
+    <!-- Fondo de partículas 3D -->
+    <canvas id="canvas3d"></canvas>
+
+    <!-- Contenedor principal -->
+    <div class="contenedor-principal">
+        <!-- Encabezado -->
+        <header class="encabezado">
+            <h1 class="titulo-principal">
+                <span class="icono-titulo">🥗</span>
+                Visualizador Nutricional 3D
+            </h1>
+            <p class="subtitulo">Explora la información nutricional en un entorno 3D interactivo</p>
+        </header>
+
+        <!-- Panel de búsqueda -->
+        <section class="panel-busqueda">
+            <div class="contenedor-busqueda">
+                <input type="text" id="inputCodigoBarras" class="input-busqueda"
+                    placeholder="Ingresa el código de barras del producto..."
+                    aria-label="Código de barras del producto">
+                <button id="btnBuscar" class="btn-buscar">
+                    <span class="icono-buscar">🔍</span>
+                    Buscar Producto
+                </button>
+            </div>
+            <p class="texto-ayuda">
+                💡 Prueba con: <code class="codigo-ejemplo"
+                    onclick="document.getElementById('inputCodigoBarras').value='3017620422003'">3017620422003</code>
+                (Nutella)
+            </p>
+        </section>
+
+        <!-- Panel de información del producto -->
+        <section id="panelProducto" class="panel-producto oculto">
+            <div class="tarjeta-producto">
+                <div class="encabezado-producto">
+                    <h2 id="nombreProducto" class="nombre-producto"></h2>
+                    <p id="marcaProducto" class="marca-producto"></p>
+                </div>
+                <div class="info-adicional">
+                    <span id="codigoProducto" class="codigo-producto"></span>
+                    <span id="fuenteProducto" class="fuente-producto"></span>
+                </div>
+            </div>
+
+            <!-- Calculadora de porciones -->
+            <div class="calculadora-porcion">
+                <h3 class="titulo-calculadora">⚖️ Calcular por Porción</h3>
+                <div class="contenedor-porcion">
+                    <input type="number" id="inputGramos" class="input-gramos" placeholder="100" min="1" value="100"
+                        aria-label="Gramos de porción">
+                    <span class="unidad-gramos">gramos</span>
+                    <button id="btnCalcularPorcion" class="btn-calcular">
+                        Calcular
+                    </button>
+                </div>
+            </div>
+
+            <!-- Tabla de nutrientes -->
+            <div class="contenedor-tabla">
+                <h3 class="titulo-nutrientes">📊 Información Nutricional (por 100g)</h3>
+                <div id="tablaNutrientes" class="tabla-nutrientes"></div>
+            </div>
+        </section>
+
+        <!-- Indicador de carga -->
+        <div id="indicadorCarga" class="indicador-carga oculto">
+            <div class="spinner"></div>
+            <p>Buscando producto...</p>
+        </div>
+
+        <!-- Mensaje de error -->
+        <div id="mensajeError" class="mensaje-error oculto">
+            <span class="icono-error">⚠️</span>
+            <p id="textoError"></p>
+        </div>
+
+        <!-- Controles de la escena 3D -->
+        <div class="controles-3d">
+            <p class="texto-controles">
+                🖱️ <strong>Controles:</strong> Arrastra para rotar • Rueda para zoom • Click derecho para mover
+            </p>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>
