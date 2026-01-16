@@ -344,14 +344,9 @@ async function calcularPorcion() {
         const datos = await respuesta.json();
 
         // Actualizar visualización con los nuevos valores
-        const nutrientesActualizados = Object.entries(datos.nutrientes).map(([nombre, info]) => ({
-            nombre: nombre,
-            valor: info.valor,
-            unidad: info.unidad
-        }));
-
-        mostrarTablaNutrientes(nutrientesActualizados);
-        crearVisualizacionNutrientes(nutrientesActualizados);
+        // datos.nutrientes ya es un array con objetos {nombre, valor, unidad}
+        mostrarTablaNutrientes(datos.nutrientes);
+        crearVisualizacionNutrientes(datos.nutrientes);
 
         // Actualizar título para indicar la porción
         elementos.nombreProducto.textContent =
