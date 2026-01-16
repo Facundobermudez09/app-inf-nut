@@ -26,11 +26,24 @@ def obtenerProducto(codigo_barras):
     return jsonify(productoADic(producto))
 
 
+<<<<<<< HEAD
+@productos_bp.route("/productos/<codigo_barras>/porcion/<gramos>", methods=['GET']) #definimos una ruta con el codigo de barras y las cantidades en gramos
+
+#funcion que recibe el codigo y las cantidades en gramos. busca el producto en la base de datos. si no existe lo informa, caso contrario calcula los nutrientes con la porcion indicada y devuelve el resultado como json
+def calcularPorcion(codigo_barras, gramos):
+    try:
+        gramos = float(gramos)  # Convertir a float manualmente
+    except ValueError:
+        return jsonify({"error": "gramos debe ser un número válido"}), 400
+    
+    producto=Producto.query.filter_by(codigoBarras=codigo_barras).first()
+=======
 @productos_bp.route("/productos/<codigo_barras>/porcion/<float:gramos>") #definimos una ruta con el codigo de barras y las cantidades en gramos
 
 #funcion que recibe el codigo y las cantidades en gramos. busca el producto en la base de datos. si no existe lo informa, caso contrario calcula los nutrientes con la porcion indicada y devuelve el resultado como json
 def calcularPorcion(codigoBarras,gramos):
     producto=Producto.query.filter_by(codigoBarras=codigoBarras).first()
+>>>>>>> 6d51e740317d2bd5a7b1334fb8c62073c3bb65c6
     if not producto:
         return jsonify({"error":"producto no encontrado"}),404
     resultado=calcularNutrientesPorPorcion(producto,gramos)
